@@ -88,9 +88,12 @@ const Home: NextPage = () => {
               placeholder="Alto (CM)"
             />
           </div>
-          <div className="mt-4">
+          <div className="mt-2">
+            <p className="mb-4 text-xs italic text-sky-gray">
+              * Debes completar todos los campos para poder cotizar
+            </p>
             <Button className="w-full bg-sky-red text-white md:w-40">
-              Cotizar
+              Buscar
             </Button>
           </div>
         </div>
