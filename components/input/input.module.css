@@ -1,0 +1,39 @@
+.inputContainer {
+  display: inline-block;
+  width: 100%;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.input{
+    height: 56px;
+    width: 100%;
+    border-radius: 4px;
+    line-height: 24px;
+    font-size: 14px;
+    padding: 1rem;
+    color: var(--black);
+    transition: border .15s ease-out;
+    outline-color: var(--violet);
+}
+
+.inputPadding {
+  padding-left: 2.5rem;
+}
+
+.inputIcon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor:pointer;
+    left: 1rem;
+
+}
+
+.inputFullWidth{
+   width: 100%;
+}

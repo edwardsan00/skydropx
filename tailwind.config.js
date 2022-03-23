@@ -1,17 +1,23 @@
+const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
+    './containers/**/**/.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {},
     colors: {
-      'sky-black': '#04142a',
-      'sky-violet': '#4E34E1',
-      'sky-green': '#60d192',
-      'sky-gray': '#6b6b82',
-      'sky-red': '#ef7b89',
-      'sky-blue': '#010057',
+      ...colors,
+      'sky-black': 'var(--back)',
+      'sky-violet': 'var(--violet)',
+      'sky-green': 'var(--green)',
+      'sky-gray': 'var(--gray)',
+      'sky-red': 'var(--red)',
+      'sky-blue': 'var(--blue)',
+      'sky-bg1': 'var(--bg1)',
+      'sky-bg2': 'var(--bg2)',
+      'sky-bg3': 'var(--bg3)',
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
