@@ -1,7 +1,6 @@
 .button {
   outline: none;
   transition: all .15s ease-in;
-  cursor: pointer;
   font-weight: 700;
   line-height: 16px;
   letter-spacing: .8px;
@@ -11,6 +10,10 @@
   align-items: center;
   padding: 1rem;
   border-radius: 4px;
+}
+
+.button:disabled{
+  background-color: var(--gray);
 }
 
 .buttonFull{

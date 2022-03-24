@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react'
-import { Input } from 'components/input'
+import { Input } from 'components/atoms/input'
 
-describe('components/input', () => {
+describe('components/atoms/input', () => {
   it('Should render component', () => {
     const input = render(<Input name="Test" />)
     expect(input).not.toBeNull()

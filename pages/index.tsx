@@ -1,13 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import clxs from 'clsx'
-import { Input } from 'components/input'
-import { Button } from 'components/button'
-import { LocationSolid, WeightSolid, LengthSolid } from 'components/icons'
-import styles from 'styles/home.module.css'
 import clsx from 'clsx'
+import { FormBudget, FormInputs } from 'components/organisms/form-budget'
+import styles from 'styles/home.module.css'
 
 const Home: NextPage = () => {
+  const handleData = (data: FormInputs) => {
+    console.log('🚀 ~ file: index.tsx ~ line 10 ~ handleData ~ data', data)
+  }
+
   return (
     <div
       className={clsx(['flex min-h-screen flex-col bg-sky-bg3', styles.home])}
@@ -36,67 +37,7 @@ const Home: NextPage = () => {
             automatizado de los envíos a tu cliente final y equipo.
           </p>
         </div>
-        <div
-          className={clsx([
-            'flex w-full flex-col rounded-md bg-white px-8 pt-8 pb-5',
-            styles.homeBlur,
-          ])}
-        >
-          <div className="flex w-full flex-col md:flex-row">
-            <Input
-              name="from"
-              fullWidth
-              className="mb-2 md:mr-2"
-              icon={<LocationSolid className="fill-sky-red" />}
-              placeholder="Codigo origen"
-            />
-            <Input
-              fullWidth
-              name="to"
-              className="mb-2"
-              icon={<LocationSolid className="fill-sky-red" />}
-              placeholder="Codigo destino"
-            />
-          </div>
-          <div className="flex w-full flex-col md:flex-row">
-            <Input
-              fullWidth
-              name="weight"
-              className="mb-2 md:mr-2"
-              icon={<WeightSolid className="fill-sky-blue" />}
-              placeholder="Peso (KG)"
-            />
-            <Input
-              fullWidth
-              name="weight"
-              className="mb-2"
-              icon={<LengthSolid className="fill-sky-black" />}
-              placeholder="Largo (CM)"
-            />
-          </div>
-          <div className="flex w-full flex-col md:flex-row">
-            <Input
-              fullWidth
-              name="width"
-              className="mb-2 md:mr-2 md:mb-0"
-              placeholder="Ancho (CM)"
-            />
-            <Input
-              fullWidth
-              name="height"
-              className="mb-2 md:mb-0"
-              placeholder="Alto (CM)"
-            />
-          </div>
-          <div className="mt-2">
-            <p className="mb-4 text-xs italic text-sky-gray">
-              * Debes completar todos los campos para poder cotizar
-            </p>
-            <Button className="w-full bg-sky-red text-white md:w-40">
-              Buscar
-            </Button>
-          </div>
-        </div>
+        <FormBudget onHandleSubmitData={handleData} />
       </main>
 
       <footer className="mt-9 flex h-10 w-full items-center justify-center text-xs">

@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Button } from 'components/button'
+import { Button } from 'components/atoms/button'
 
-describe('src/containers/household-claim/components/checkbox', () => {
+describe('components/atoms/button', () => {
   it('Should dispatch event onClick', () => {
     const handleClick = jest.fn()
     const { getByLabelText } = render(
