@@ -5,10 +5,14 @@ const createJestConfig = nextJest({
 })
 
 const customJestConfig = {
+  coverageDirectory: 'coverage',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapper: {
-    '^components/(.*)$': '<rootDir>/components/$1',
-    '^pages/(.*)$': '<rootDir>/pages/$1',
+    '^@/components(.*)$': '<rootDir>/src/components/$1',
+    '^@/hooks(.*)$': '<rootDir>/src/hooks/$1',
+    '^@/pages(.*)$': '<rootDir>/src/pages/$1',
+    '^@/reducers(.*)$': '<rootDir>/src/reducers/$1',
+    '^@/store(.*)$': '<rootDir>/src/store/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
 }
