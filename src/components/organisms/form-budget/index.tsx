@@ -7,19 +7,11 @@ import {
   WeightSolid,
   LengthSolid,
 } from '@/components/atoms/icons'
+import { QuoterType } from '@/types/quoter'
 import styles from './formBudget.module.css'
 
-export type FormInputs = {
-  from: string
-  to: string
-  weight: string
-  length: string
-  width: string
-  height: string
-}
-
 type Props = {
-  onHandleSubmitData: (data: FormInputs) => void
+  onHandleSubmitData: (data: QuoterType) => void
 }
 
 export const FormBudget: React.FC<Props> = ({ onHandleSubmitData }) => {
@@ -28,7 +20,7 @@ export const FormBudget: React.FC<Props> = ({ onHandleSubmitData }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputs>({
+  } = useForm<QuoterType>({
     defaultValues: {
       from: '',
       to: '',
@@ -38,7 +30,7 @@ export const FormBudget: React.FC<Props> = ({ onHandleSubmitData }) => {
       height: '',
     },
   })
-  const onSubmitForm = (data: FormInputs) => {
+  const onSubmitForm = (data: QuoterType) => {
     onHandleSubmitData(data)
   }
 

@@ -1,14 +1,20 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import clsx from 'clsx'
 import { useAppDispatch } from '@/hooks/custom-redux'
-import { FormBudget, FormInputs } from '@/components/organisms/form-budget'
+import { FormBudget } from '@/components/organisms/form-budget'
+import { QuoterType } from '@/types/quoter'
+import { saveQuoteInput } from '@/reducers/shipmentsReducer'
 import styles from '@/styles/home.module.css'
 
 const HomePage: NextPage = () => {
-  // const dispatch = useAppDispatch()
-  const handleData = (data: FormInputs) => {
-    console.log('🚀 ~ file: index.tsx ~ line 10 ~ handleData ~ data', data)
+  const router = useRouter()
+  const dispatch = useAppDispatch()
+
+  const handleData = (data: QuoterType) => {
+    dispatch(saveQuoteInput(data))
+    router.push('/shipments')
   }
 
   return (

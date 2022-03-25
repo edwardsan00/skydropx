@@ -21,7 +21,9 @@
      "@/pages/*": ["src/pages/*"],
      "@/reducers/*": ["src/reducers/*"],
      "@/store/*": ["src/store/*"],
-     "@/styles/*": ["src/styles/*"]
+     "@/styles/*": ["src/styles/*"],
+     "@/types/*": ["src/types/*"],
+     "@/utils/*": ["src/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
