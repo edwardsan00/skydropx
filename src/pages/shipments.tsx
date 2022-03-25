@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { useAppSelector, useAppDispatch } from '@/hooks/custom-redux'
 import { createShipment } from '@/reducers/shipmentsReducer'
 import { FullLoaderScreen } from '@/components/molecules/loader'
+import { CardRate } from '@/components/molecules/card-rate'
 import styles from '@/styles/shipments.module.css'
 
 const ShipmentsPage: NextPage = () => {
@@ -58,12 +59,28 @@ const ShipmentsPage: NextPage = () => {
           alt="Skydropx"
         />
         <div>
-          <p className="text-xs">Desde: Ciudad de México</p>
-          <p className="text-xs">Hasta: Jalisco</p>
+          <p className="text-xs">
+            Desde: <span className="font-bold">Ciudad de México</span>
+          </p>
+          <p className="text-xs">
+            Hasta: <span className="font-bold">Jalisco</span>
+          </p>
         </div>
       </header>
-      <main className="m-auto flex w-full max-w-screen-lg grow flex-col items-center justify-center px-4  md:justify-center"></main>
-      {/*  <FullLoaderScreen /> */}
+      <main className="m-auto flex w-full max-w-screen-lg grow flex-col px-4">
+        <h2 className="mb-10 mt-10 text-2xl font-bold text-sky-blue">
+          Todos los envios disponibles para ti
+        </h2>
+        <div
+          className="mb-10 grid grid-cols-3 gap-10
+        "
+        >
+          {[1, 2, 3, 4].map(() => (
+            <CardRate />
+          ))}
+        </div>
+      </main>
+      {/* <FullLoaderScreen /> */}
     </div>
   )
 }

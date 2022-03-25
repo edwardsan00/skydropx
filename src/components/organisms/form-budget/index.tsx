@@ -7,7 +7,7 @@ import {
   WeightSolid,
   LengthSolid,
 } from '@/components/atoms/icons'
-import { QuoterType } from '@/types/quoter'
+import { QuoterType } from '@/types/shipments'
 import styles from './formBudget.module.css'
 
 type Props = {

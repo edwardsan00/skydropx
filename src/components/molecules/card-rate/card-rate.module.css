@@ -1,0 +1,62 @@
+.cardRate {
+}
+
+.cardRateSteep {
+  display: flex;
+}
+
+.cardRateSteep:last-child .cardRateSteepDashed {
+  border: none;
+}
+
+.cardRateSteepCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: rgb(96 209 146 / 39%);
+}
+
+.cardRateSteepCircle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--green);
+}
+
+.cardRateSteepDashed {
+  position: absolute;
+  height: 92%;
+  width: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: dashed 1px #bdbdbd;
+}
+
+.cardRateSteepRight {
+  margin-left: 10px;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.cardRateSteepTitle {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.cardRateAmout {
+  border-radius: 4px;
+  background-color: var(--violet);
+  border: solid 1px var(--violet);
+  color: white;
+  padding: 4px;
+}

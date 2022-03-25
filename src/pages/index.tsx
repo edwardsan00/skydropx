@@ -4,7 +4,7 @@ import Head from 'next/head'
 import clsx from 'clsx'
 import { useAppDispatch } from '@/hooks/custom-redux'
 import { FormBudget } from '@/components/organisms/form-budget'
-import { QuoterType } from '@/types/quoter'
+import { QuoterType } from '@/types/shipments'
 import { saveQuoteInput } from '@/reducers/shipmentsReducer'
 import styles from '@/styles/home.module.css'
 

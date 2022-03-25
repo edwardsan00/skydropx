@@ -1,6 +1,6 @@
 import store from '@/store/index'
 import { saveQuoteInput } from '@/reducers/shipmentsReducer'
-import { QuoterType } from '@/types/quoter'
+import { QuoterType } from '@/types/shipments'
 
 describe('reducers/shipments', () => {
   it('Should return initial state', () => {

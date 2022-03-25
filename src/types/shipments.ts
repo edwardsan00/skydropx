@@ -6,3 +6,5 @@ export type QuoterType = {
   width: string
   height: string
 }
+
+export type TypeShipments = 'shipments' | 'parcels' | 'rates' | 'addresses'

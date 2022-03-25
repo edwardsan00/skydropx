@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { QuoterType } from '@/types/quoter'
+import { QuoterType } from '@/types/shipments'
 import type { RootState, AppThunk } from 'src/store'
 
 const PARCEL = {
