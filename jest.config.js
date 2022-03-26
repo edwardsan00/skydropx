@@ -5,7 +5,16 @@ const createJestConfig = nextJest({
 })
 
 const customJestConfig = {
-  coverageDirectory: 'coverage',
+  collectCoverage: true,
+  // collectCoverageFrom: ['<rootDir>/src/**/*.{ts,js}'],
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
+    },
+  },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapper: {
     '^@/components(.*)$': '<rootDir>/src/components/$1',

@@ -30,14 +30,6 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
     (state) => state.shipments
   )
   const dispatch = useAppDispatch()
-  const queryValidate: (keyof QuoterType)[] = [
-    'from',
-    'to',
-    'weight',
-    'height',
-    'length',
-    'width',
-  ]
 
   const handleSelectRate = ({
     currentTarget,
@@ -63,13 +55,7 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
   }, [label])
 
   useEffect(() => {
-    const isValidQuery = queryValidate.every(
-      (val) =>
-        Object.prototype.hasOwnProperty.call(queryPage, val) && queryPage[val]
-    )
-    if (isValidQuery) {
-      dispatch(createShipment(queryPage))
-    } else router.push('/')
+    dispatch(createShipment(queryPage))
   }, [])
 
   return (
@@ -161,8 +147,25 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
   )
 }
 
-ShipmentsPage.getInitialProps = async ({ query }) => {
+ShipmentsPage.getInitialProps = async ({ query, res }) => {
+  const queryValidate: (keyof QuoterType)[] = [
+    'from',
+    'to',
+    'weight',
+    'height',
+    'length',
+    'width',
+  ]
   const queryPage = query as QuoterType
+  const isValidQuery = queryValidate.every(
+    (val) =>
+      Object.prototype.hasOwnProperty.call(queryPage, val) && queryPage[val]
+  )
+  if (!isValidQuery) {
+    res?.writeHead(301, { Location: '/' })
+    res?.end()
+  }
+
   return { queryPage }
 }
 

@@ -4,13 +4,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest --coverage --watchAll=false",
+    "test": "jest --coverage --watchAll=false --colors --coverageDirectory=coverage",
     "test:ci": "jest --ci"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.1",
     "next": "latest",
+    "nock": "^13.2.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.28.1",
