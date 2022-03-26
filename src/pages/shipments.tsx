@@ -1,45 +1,75 @@
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import clsx from 'clsx'
 import { useAppSelector, useAppDispatch } from '@/hooks/custom-redux'
-import { createShipment } from '@/reducers/shipmentsReducer'
+import {
+  createShipment,
+  createLabel,
+  resetShipments,
+} from '@/reducers/shipmentsReducer'
+import { QuoterType } from '@/types/shipments'
 import { FullLoaderScreen } from '@/components/molecules/loader'
 import { CardRate } from '@/components/molecules/card-rate'
 import styles from '@/styles/shipments.module.css'
 
-const ShipmentsPage: NextPage = () => {
-  const data = {
-    id: '7146454',
-    type: 'rates',
-    attributes: {
-      created_at: '2018-12-18T15:00:22.141-06:00',
-      updated_at: '2018-12-18T15:00:22.141-06:00',
-      amount_local: '149.0',
-      currency_local: 'MXN',
-      provider: 'FEDEX',
-      service_level_name: 'Fedex Express Saver',
-      service_level_code: 'FEDEX_EXPRESS_SAVER',
-      service_level_terms: null,
-      days: 5,
-      duration_terms: null,
-      zone: null,
-      arrives_by: null,
-      out_of_area: true,
-      out_of_area_pricing: '145.00',
-      total_pricing: '294.0',
-      is_occure: true,
-    },
-  } as any
+export type Props = {
+  queryPage: QuoterType
+}
+
+type RateSelected = {
+  rateId: string
+  courier: string
+}
+
+const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
+  const router = useRouter()
+  const [rateSelected, setRateSelected] = useState<null | RateSelected>(null)
+  const { rates, loading, error, label } = useAppSelector(
+    (state) => state.shipments
+  )
   const dispatch = useAppDispatch()
-  const { quoter } = useAppSelector((store) => store.shipments)
+  const queryValidate: (keyof QuoterType)[] = [
+    'from',
+    'to',
+    'weight',
+    'height',
+    'length',
+    'width',
+  ]
+
+  const handleSelectRate = ({
+    currentTarget,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    const { value: rateId } = currentTarget
+    const courier = currentTarget.dataset.courier as string
+    setRateSelected({ courier, rateId })
+  }
+
+  const handleSendRate = () => {
+    if (rateSelected?.rateId)
+      dispatch(createLabel(parseInt(rateSelected.rateId)))
+  }
 
   useEffect(() => {
-    if (Object.values(quoter).every((val) => val)) {
-      dispatch(createShipment())
-    } else {
-      console.log('no hay na')
+    if (label && label.label_url) {
+      window.open(label.label_url, '_blank')
+      router.push('/')
+      return () => {
+        dispatch(resetShipments())
+      }
     }
+  }, [label])
+
+  useEffect(() => {
+    const isValidQuery = queryValidate.every(
+      (val) =>
+        Object.prototype.hasOwnProperty.call(queryPage, val) && queryPage[val]
+    )
+    if (isValidQuery) {
+      dispatch(createShipment(queryPage))
+    } else router.push('/')
   }, [])
 
   return (
@@ -52,7 +82,7 @@ const ShipmentsPage: NextPage = () => {
       <Head>
         <title>Shipments</title>
       </Head>
-      <header className="m-auto flex h-16 w-full max-w-screen-lg items-center px-4 md:justify-between ">
+      <header className="m-auto flex h-16 w-full max-w-screen-lg items-center justify-between px-4 ">
         <img
           src="/assets/images/skydropx-logo.svg"
           className={styles.shipmentsLogo}
@@ -67,22 +97,73 @@ const ShipmentsPage: NextPage = () => {
           </p>
         </div>
       </header>
-      <main className="m-auto flex w-full max-w-screen-lg grow flex-col px-4">
-        <h2 className="mb-10 mt-10 text-2xl font-bold text-sky-blue">
-          Todos los envios disponibles para ti
-        </h2>
-        <div
-          className="mb-10 grid grid-cols-3 gap-10
-        "
-        >
-          {[1, 2, 3, 4].map(() => (
-            <CardRate />
-          ))}
-        </div>
+      <main className="m-auto flex w-full max-w-screen-lg grow flex-col px-4 pb-20">
+        {rates.length ? (
+          <>
+            <h2 className="mb-10 mt-10 text-2xl font-bold text-sky-blue">
+              Todos los envios disponibles para ti
+            </h2>
+            <div
+              className="mb-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3
+            "
+            >
+              {rates.map((rate, index) => (
+                <CardRate
+                  bestOption={index == 0}
+                  key={rate.id}
+                  value={rate.id}
+                  rate={rate}
+                  onChange={handleSelectRate}
+                  name="shipmentRate"
+                />
+              ))}
+            </div>
+          </>
+        ) : null}
+        {(loading === 'READY' && !rates.length) || error ? (
+          <div className=" flex w-full flex-col items-center justify-center">
+            <img
+              className={styles.shipmentNotFound}
+              src="/assets/images/not-found.svg"
+              alt="No hay envios disponibles"
+            />
+            <p className="mt-5 text-center text-2xl font-bold text-sky-red">
+              ¡Lo sentimos!
+            </p>
+            <p className="mt-2 text-center text-sm text-sky-black">
+              No encontramos envios disponibles para ti en este momento
+            </p>
+          </div>
+        ) : null}
       </main>
-      {/* <FullLoaderScreen /> */}
+      {loading === 'LOADING' ? <FullLoaderScreen /> : null}
+      <div
+        className={clsx([
+          styles.shipmentFixFooter,
+          'shadow-lg',
+          { [styles.shipmentFixFooterActive]: rateSelected },
+        ])}
+      >
+        <div className="m-auto flex h-full w-full max-w-screen-lg items-center justify-between px-4 ">
+          <div>
+            <p className="text-xs">{rateSelected?.rateId}</p>
+            <p className="font-bold">{rateSelected?.courier}</p>
+          </div>
+          <button
+            onClick={handleSendRate}
+            className="rounded bg-sky-green p-3 text-white transition-all hover:bg-green-400"
+          >
+            Confirmar
+          </button>
+        </div>
+      </div>
     </div>
   )
+}
+
+ShipmentsPage.getInitialProps = async ({ query }) => {
+  const queryPage = query as QuoterType
+  return { queryPage }
 }
 
 export default ShipmentsPage
