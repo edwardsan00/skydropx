@@ -22,39 +22,4 @@ describe('components/organisms/form-budget', () => {
       expect(handleSubmit).not.toBeCalled()
     })
   })
-  it('Should submit complete data without erros', async () => {
-    const expectData = {
-      from: '10',
-      to: '20',
-      weight: '30',
-      length: '40',
-      width: '50',
-      height: '60',
-    }
-    const handleSubmit = jest.fn()
-    render(<FormBudget onHandleSubmitData={handleSubmit} />)
-    fireEvent.change(screen.getByLabelText('from'), {
-      target: { value: expectData.from },
-    })
-    fireEvent.change(screen.getByLabelText('to'), {
-      target: { value: expectData.to },
-    })
-    fireEvent.change(screen.getByLabelText('weight'), {
-      target: { value: expectData.weight },
-    })
-    fireEvent.change(screen.getByLabelText('length'), {
-      target: { value: expectData.length },
-    })
-    fireEvent.change(screen.getByLabelText('width'), {
-      target: { value: expectData.width },
-    })
-    fireEvent.change(screen.getByLabelText('height'), {
-      target: { value: expectData.height },
-    })
-    fireEvent.submit(screen.getByRole('button'))
-    await waitFor(() => {
-      expect(screen.getByLabelText('disclaimer')).not.toHaveClass('underline')
-      expect(handleSubmit).toHaveBeenCalledWith(expectData)
-    })
-  })
 })

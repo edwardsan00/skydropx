@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toast'
+import { Skydropx } from '@/constants/endpoints'
 import { Post } from '@/utils/api'
 import {
   QuoterType,
@@ -9,7 +10,6 @@ import {
   LabelAttributes,
   Label,
 } from '@/types/shipments'
-import type { RootState, AppThunk } from 'src/store'
 
 type Loading = 'NEW' | 'LOADING' | 'READY'
 
@@ -85,7 +85,7 @@ export const createShipment = createAsyncThunk(
         },
       ],
     } as any
-    return await Post('shipments', {
+    return await Post(Skydropx.CreateShipment, {
       body,
     })
   }
@@ -95,7 +95,7 @@ export const createLabel = createAsyncThunk(
   'shipments/createLabel',
   async (rateId: number) => {
     const body = { rate_id: rateId, label_format: 'pdf' }
-    return await Post('labels', {
+    return await Post(Skydropx.CreateLabel, {
       body,
     })
   }

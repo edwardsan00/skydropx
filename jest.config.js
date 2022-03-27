@@ -23,6 +23,7 @@ const customJestConfig = {
     '^@/reducers(.*)$': '<rootDir>/src/reducers/$1',
     '^@/store(.*)$': '<rootDir>/src/store/$1',
     '^@/utils(.*)$': '<rootDir>/src/utils/$1',
+    '^@/constants(.*)$': '<rootDir>/src/constants/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
 }

@@ -16,7 +16,7 @@ const iconArea = {
 
 type Props = {
   rate: Rate
-  bestOption: boolean
+  bestOption?: boolean
 } & React.ComponentPropsWithoutRef<'input'>
 
 const addDays = (days: number) => {
@@ -43,9 +43,10 @@ export const CardRate = React.forwardRef(function RadioCardRate(
     },
   } = rate
   return (
-    <label htmlFor={id} className={styles.cardRate}>
+    <label aria-label="rate" htmlFor={id} className={styles.cardRate}>
       <input
         type="radio"
+        aria-label="radio"
         data-courier={service_level_name}
         className={styles.cardRateInput}
         ref={ref}
@@ -124,7 +125,7 @@ export const CardRate = React.forwardRef(function RadioCardRate(
             <p className="text-sm text-gray-600">{service_level_name}</p>
           </div>
           {bestOption ? (
-            <div className="rounded">
+            <div aria-label="best-option" className="rounded">
               <MedalSolid className="fill-sky-red" />
             </div>
           ) : null}
