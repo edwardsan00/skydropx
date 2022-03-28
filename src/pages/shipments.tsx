@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -52,10 +53,11 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
         dispatch(resetShipments())
       }
     }
-  }, [label])
+  }, [label, dispatch, router])
 
   useEffect(() => {
     dispatch(createShipment(queryPage))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

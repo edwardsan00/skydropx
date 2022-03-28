@@ -1,4 +1,5 @@
 {
+  "version": "1.0.0",
   "name": "skydropx-challenge",
   "author": "Edward Sanchez",
   "homepage": "https://github.com/edwardsan00/skydropx",
@@ -15,6 +16,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "test": "jest --coverage --watchAll=false --colors --coverageDirectory=coverage",
     "test:ci": "jest --ci"
   },
@@ -40,6 +42,8 @@
     "autoprefixer": "^10.4.0",
     "axios-mock-adapter": "^1.20.0",
     "clsx": "^1.1.1",
+    "eslint": "^8.12.0",
+    "eslint-config-next": "^12.1.1",
     "jest": "^27.5.1",
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
