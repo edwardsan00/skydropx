@@ -1,10 +1,21 @@
 {
+  "name": "skydropx-challenge",
+  "author": "Edward Sanchez",
+  "homepage": "https://github.com/edwardsan00/skydropx",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:edwardsan00/skydropx.git"
+  },
+  "description": "SPA built with next js to generate rates and shipping guides for packages",
+  "engines": {
+    "node": ">=14"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest --coverage --watchAll=false --colors --coverageDirectory=coverage --detectOpenHandles",
+    "test": "jest --coverage --watchAll=false --colors --coverageDirectory=coverage",
     "test:ci": "jest --ci"
   },
   "dependencies": {
