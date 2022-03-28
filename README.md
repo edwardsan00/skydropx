@@ -1,4 +1,5 @@
 # SkydropX Developer Challenges
+**Demo [here](https://skydropx-chi.vercel.app/)**, deployed on [Vercel](https://vercel.com/).
 
 ## How to use
 
