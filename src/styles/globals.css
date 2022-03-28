@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+::-webkit-datetime-edit-year-field:not([aria-valuenow]) {
+  color: transparent;
+}
+::-webkit-datetime-edit-month-field:not([aria-valuenow]) {
+  color: transparent;
+}
+::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+  color: transparent;
+}
+
+:root,
+#root {
+  --back: #04142a;
+  --violet: #4e34e1;
+  --green: #60d192;
+  --gray: #6b6b82;
+  --red: #ef7b89;
+  --blue: #010057;
+  --bg1: #fafaff;
+  --bg2: #f4f4ff;
+  --bg3: #fff5f5;
+}
