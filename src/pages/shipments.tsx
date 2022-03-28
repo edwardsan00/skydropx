@@ -121,7 +121,7 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
           </div>
         ) : null}
       </main>
-      {loading === 'LOADING' ? <FullLoaderScreen /> : null}
+      {loading === 'LOADING' ? <FullLoaderScreen withText={true} /> : null}
       <div
         className={clsx([
           styles.shipmentFixFooter,
