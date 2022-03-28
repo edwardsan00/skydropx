@@ -1,0 +1,30 @@
+.shipments {
+  min-width: 340px;
+}
+
+.shipmentsLogo {
+  width: 100%;
+  max-width: 140px;
+}
+
+.shipmentNotFound {
+  width: 100%;
+  max-width: 700px;
+}
+
+.shipmentFixFooter {
+  position: fixed;
+  width: 100%;
+  bottom: -80px;
+  height: 80px;
+  background-color: white;
+  box-shadow: 0px -1px 5px 1px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px -1px 5px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px -1px 5px 1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+}
+
+.shipmentFixFooterActive {
+  bottom: 0;
+  transition: all 0.3s ease-in-out;
+}

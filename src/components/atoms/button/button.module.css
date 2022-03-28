@@ -1,0 +1,42 @@
+.button {
+  outline: none;
+  transition: all .15s ease-in;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: .8px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.button:disabled{
+  background-color: var(--gray);
+}
+
+.buttonFull{
+  min-width: 100%;
+}
+
+.buttonLoader {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border: 2px solid transparent;
+    background: 0;
+    border-radius: 50%;
+    border-top-color: white;
+    border-left-color: white;
+    animation: spinLoading 0.7s infinite linear;
+}
+
+@keyframes spinLoading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
