@@ -1,5 +1,4 @@
-import { screen, fireEvent, waitFor, getByRole } from '@testing-library/react'
-
+import { screen, fireEvent, waitFor } from '@testing-library/react'
 import { renderWithRouterAndRedux } from '@/utils/customRender'
 import { createMockRouter } from '@/utils/createMockRouter'
 import HomePage from '@/pages/index'

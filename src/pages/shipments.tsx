@@ -60,6 +60,7 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
 
   return (
     <div
+      data-testid="shipmentsPage"
       className={clsx([
         'flex min-h-screen flex-col bg-sky-bg2',
         styles.shipments,
@@ -130,18 +131,24 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
           { [styles.shipmentFixFooterActive]: rateSelected },
         ])}
       >
-        <div className="m-auto flex h-full w-full max-w-screen-lg items-center justify-between px-4 ">
-          <div>
-            <p className="text-xs">{rateSelected?.rateId}</p>
-            <p className="font-bold">{rateSelected?.courier}</p>
+        {rates.length ? (
+          <div className="m-auto flex h-full w-full max-w-screen-lg items-center justify-between px-4 ">
+            <div>
+              <p aria-label="rateId" className="text-xs">
+                {rateSelected?.rateId}
+              </p>
+              <p className="font-bold">{rateSelected?.courier}</p>
+            </div>
+            <button
+              aria-label="send-rate"
+              disabled={!rateSelected?.rateId}
+              onClick={handleSendRate}
+              className="rounded bg-sky-green p-3 text-white transition-all hover:bg-green-400"
+            >
+              Confirmar
+            </button>
           </div>
-          <button
-            onClick={handleSendRate}
-            className="rounded bg-sky-green p-3 text-white transition-all hover:bg-green-400"
-          >
-            Confirmar
-          </button>
-        </div>
+        ) : null}
       </div>
     </div>
   )

@@ -1,16 +1,29 @@
-import { render } from '@testing-library/react'
+import { render, RenderResult } from '@testing-library/react'
+import { PreloadedState } from '@reduxjs/toolkit'
 import { NextRouter } from 'next/router'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { Provider } from 'react-redux'
-import store from '@/store/index'
+import store, { RootState, makeStore } from '@/store/index'
 
-export const renderWithRouterAndRedux = (
-  ui: JSX.Element,
-  routeValue: NextRouter
+interface RenderWithRouterAndRedux {
+  (
+    ui: JSX.Element,
+    routerOptions: NextRouter,
+    preloadedState?: PreloadedState<RootState>
+  ): RenderResult
+}
+
+export const renderWithRouterAndRedux: RenderWithRouterAndRedux = (
+  ui,
+  routerOptions,
+  preloadedState
 ) => {
+  const localStore = Boolean(preloadedState) ? makeStore(preloadedState) : store
   return render(
-    <Provider store={store}>
-      <RouterContext.Provider value={routeValue}>{ui}</RouterContext.Provider>
+    <Provider store={localStore}>
+      <RouterContext.Provider value={routerOptions}>
+        {ui}
+      </RouterContext.Provider>
     </Provider>
   )
 }

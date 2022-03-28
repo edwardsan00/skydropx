@@ -64,7 +64,7 @@ export type ShipmentsSliceState = {
 const initialState: ShipmentsSliceState = {
   label: null,
   rates: [],
-  loading: 'READY',
+  loading: 'NEW',
   error: null,
 }
 

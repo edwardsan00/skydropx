@@ -15,6 +15,7 @@ const customJestConfig = {
       statements: 100,
     },
   },
+  setupFiles: ['<rootDir>/.jest/setEnvVars.js'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapper: {
     '^@/components(.*)$': '<rootDir>/src/components/$1',

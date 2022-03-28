@@ -12,7 +12,7 @@ export type Post = {
   body: Record<string, any>
 } & BaseAPI
 
-const baseURL = `${process.env.NEXT_APP_REST_API_LOCATION}${process.env.NEXT_APP_REST_API_VERSION}/`
+export const baseURL = `${process.env.NEXT_APP_REST_API_LOCATION}${process.env.NEXT_APP_REST_API_VERSION}/`
 
 const instance = axios.create({
   baseURL,
@@ -23,18 +23,9 @@ const instance = axios.create({
   },
 })
 
-export const Get = async (endpint: string, { headers, params }: Get) => {
+export const Post = async (endpoint: string, { body, headers }: Post) => {
   try {
-    const result = await instance.get(endpint, { headers, params })
-    return await result.data
-  } catch (err) {
-    throw err
-  }
-}
-
-export const Post = async (endpint: string, { body, headers }: Post) => {
-  try {
-    const result = await instance.post(endpint, body, { headers })
+    const result = await instance.post(endpoint, body, { headers })
     return await result.data
   } catch (err) {
     throw err
