@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import clsx from 'clsx'
 import { useAppSelector, useAppDispatch } from '@/hooks/custom-redux'
+import { wrapper } from '@/store/index'
 import {
   createShipment,
   createLabel,
@@ -54,11 +55,6 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
       }
     }
   }, [label, dispatch, router])
-
-  useEffect(() => {
-    dispatch(createShipment(queryPage))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <div
@@ -156,26 +152,30 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
   )
 }
 
-ShipmentsPage.getInitialProps = async ({ query, res }) => {
-  const queryValidate: (keyof QuoterType)[] = [
-    'from',
-    'to',
-    'weight',
-    'height',
-    'length',
-    'width',
-  ]
-  const queryPage = query as QuoterType
-  const isValidQuery = queryValidate.every(
-    (val) =>
-      Object.prototype.hasOwnProperty.call(queryPage, val) && queryPage[val]
-  )
-  if (!isValidQuery) {
-    res?.writeHead(301, { Location: '/' })
-    res?.end()
-  }
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ query, res }) => {
+      const queryValidate: (keyof QuoterType)[] = [
+        'from',
+        'to',
+        'weight',
+        'height',
+        'length',
+        'width',
+      ]
+      const queryPage = query as QuoterType
+      const isValidQuery = queryValidate.every(
+        (val) =>
+          Object.prototype.hasOwnProperty.call(queryPage, val) && queryPage[val]
+      )
+      if (!isValidQuery) {
+        res?.writeHead(301, { Location: '/' })
+        res?.end()
+      }
+      await store.dispatch(createShipment(queryPage))
 
-  return { queryPage }
-}
+      return { props: { queryPage } }
+    }
+)
 
 export default ShipmentsPage

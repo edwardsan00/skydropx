@@ -1,5 +1,11 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {
+  createAction,
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit'
 import { toast } from 'react-toast'
+import { HYDRATE } from 'next-redux-wrapper'
 import { Skydropx } from '@/constants/endpoints'
 import { Post } from '@/utils/api'
 import {
@@ -68,6 +74,9 @@ const initialState: ShipmentsSliceState = {
   error: null,
 }
 
+const REDUCER_HIDRATE =
+  createAction<PayloadAction<Record<string, any>>>(HYDRATE)
+
 export const createShipment = createAsyncThunk(
   'shipments/createShipment',
   async (quote: QuoterType) => {
@@ -113,6 +122,20 @@ export const shipmentsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(
+      REDUCER_HIDRATE.type,
+      (
+        state: ShipmentsSliceState,
+        action: PayloadAction<Record<string, any>>
+      ) => {
+        if (!!action.payload.shipments) {
+          state.rates = action.payload.shipments.rates
+          state.loading = action.payload.shipments.loading
+          state.error = action.payload.shipments.error
+        }
+        state
+      }
+    )
     builder
       .addCase(createShipment.pending, (state) => {
         state.loading = 'LOADING'
