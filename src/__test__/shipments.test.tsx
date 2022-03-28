@@ -20,7 +20,7 @@ describe('pages/shipments', () => {
       <ShipmentsPage queryPage={query} />,
       createMockRouter({})
     )
-    expect(screen.getByText('Cargando...')).toBeInTheDocument()
+    expect(screen.getByTestId('shipmentsPage')).toBeInTheDocument()
   })
   it('Should be show rates iteration', () => {
     renderWithRouterAndRedux(

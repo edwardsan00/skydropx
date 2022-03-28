@@ -15,10 +15,10 @@ const reducer = {
 
 export type RootState = StateFromReducersMapObject<typeof reducer>
 
-export const makeStore = function makeStore() {
+export const makeStore = function makeStore(preloadedState?: any) {
   return configureStore({
     reducer: reducer,
-
+    preloadedState,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
     devTools: process.env.NODE_ENV !== 'production',
   })

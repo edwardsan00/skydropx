@@ -56,11 +56,6 @@ const ShipmentsPage: NextPage<Props> = ({ queryPage }) => {
     }
   }, [label, dispatch, router])
 
-  useEffect(() => {
-    dispatch(createShipment(queryPage))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return (
     <div
       data-testid="shipmentsPage"
@@ -179,7 +174,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       }
       await store.dispatch(createShipment(queryPage))
 
-      return { queryPage }
+      return { props: { queryPage } }
     }
 )
 
