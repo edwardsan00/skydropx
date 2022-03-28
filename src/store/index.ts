@@ -6,20 +6,19 @@ import {
   StateFromReducersMapObject,
   PreloadedState,
 } from '@reduxjs/toolkit'
-import shipmentsReducer from '@/reducers/shipmentsReducer'
+import { shipmentsSlice } from '@/reducers/shipmentsReducer'
+import { createWrapper } from 'next-redux-wrapper'
 
 const reducer = {
-  shipments: shipmentsReducer,
+  [shipmentsSlice.name]: shipmentsSlice.reducer,
 }
 
 export type RootState = StateFromReducersMapObject<typeof reducer>
 
-export const makeStore = function makeStore(
-  preloadedState?: PreloadedState<RootState>
-) {
+export const makeStore = function makeStore() {
   return configureStore({
     reducer: reducer,
-    preloadedState,
+
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
     devTools: process.env.NODE_ENV !== 'production',
   })
@@ -28,12 +27,12 @@ export const makeStore = function makeStore(
 const store = makeStore()
 
 export type AppDispatch = typeof store.dispatch
-
+export type AppStore = ReturnType<typeof makeStore>
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,
   unknown,
   Action<string>
 >
-
+export const wrapper = createWrapper<AppStore>(makeStore)
 export default store
